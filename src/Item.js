@@ -21,8 +21,14 @@ class Item extends Component{
     render(){
         return(
             <React.Fragment>
-                <h1>{this.state.item.title}</h1>
-                <p>Price: ${this.state.item.price}</p>
+                {
+                    (this.state.item.imageUrl && this.state.isCart==false)?
+                    (<img src={ this.state.item.imageUrl[0] }/>) :
+                    ("")
+                }
+                
+                <h1><a href={`/items/${this.state.item.style_partno_unbxd}`}>{this.state.item.product_short_description}</a></h1>
+                <p>Price: ${this.state.item.min_list_price}</p>
                 
                 {
                     (this.state.isCart==true) ? 

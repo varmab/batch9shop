@@ -6,27 +6,8 @@ import Checkout from './Checkout'
 class Shop extends Component{
     constructor(){
         super();
-
-        var items=[
-            {
-                id:1,
-                title:"JavaScript Beginner",
-                price:100
-            },
-            {
-                id:2,
-                title:"React Beginner",
-                price:100
-            },
-            {
-                id:3,
-                title:"Node Beginner",
-                price:100
-            }
-        ]
-
         this.state={
-            items:items,
+            items:[],
             cartItems:[],
             orderTotal:0
         }
@@ -107,6 +88,7 @@ class Shop extends Component{
     }
 
     render(){
+        console.log('rendering shop')
         return(
             <div className="row">
                 <h1>Shop</h1>
@@ -119,6 +101,18 @@ class Shop extends Component{
                 </div>
             </div>
         )
+    }
+
+    componentDidMount(){
+        var url='http://api.jsoneditoronline.org/v1/docs/572180836c614dadb4b2eccdc3a33cbc/data?jsonp';
+        fetch(url)
+        .then((response)=>response.json())
+        .then((data)=>{
+            console.log(JSON.stringify(data))
+            this.setState({
+                items:data.response.products
+            })
+        })
     }
  
 }
